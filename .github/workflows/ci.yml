@@ -1,0 +1,38 @@
+name: Enterprise App CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Download Dependencies
+        run: go mod download
+
+      - name: Build Application
+        run: go build ./...
+
+      - name: Run Tests
+        run: go test ./...
+
+      - name: Build Docker Image
+        run: docker build -t enterprise-api:test .
