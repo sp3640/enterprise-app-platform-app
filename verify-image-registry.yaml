@@ -1,0 +1,117 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sImageVerification
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"constraints.gatekeeper.sh/v1beta1","kind":"K8sImageVerification","metadata":{"annotations":{},"name":"verify-image-registry"},"spec":{"match":{"excludedNamespaces":["kube-system","gatekeeper-system","argocd","falco"],"kinds":[{"apiGroups":[""],"kinds":["Pod"]}]},"parameters":{"allowedRegistries":["ghcr.io/sp3640/"]}}}
+  creationTimestamp: "2026-04-26T10:28:05Z"
+  generation: 1
+  name: verify-image-registry
+  resourceVersion: "685610"
+  uid: 340c2796-a5af-437c-b5e9-dbd8e21b6056
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - kube-system
+    - gatekeeper-system
+    - argocd
+    - falco
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+  parameters:
+    allowedRegistries:
+    - ghcr.io/sp3640/
+    - registry.k8s.io/
+status:
+  auditTimestamp: "2026-06-20T22:00:36Z"
+  byPod:
+  - constraintUID: 340c2796-a5af-437c-b5e9-dbd8e21b6056
+    enforced: true
+    enforcementPointsStatus:
+    - enforcementPoint: vap.k8s.io
+      message: K8sNativeValidation engine is missing
+      observedGeneration: 1
+      state: error
+    id: gatekeeper-audit-b87666d48-c7t6q
+    observedGeneration: 1
+    operations:
+    - audit
+    - generate
+    - mutation-status
+    - status
+  - constraintUID: 340c2796-a5af-437c-b5e9-dbd8e21b6056
+    enforced: true
+    id: gatekeeper-controller-manager-8474f885c9-kvhz4
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  totalViolations: 9
+  violations:
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'local-path-provisioner' from untrusted registry.
+    name: local-path-provisioner-988d74bc-c9lck
+    namespace: local-path-storage
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falcoctl-artifact-follow' from untrusted registry.
+    name: falco-pp7c4
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falco' from untrusted registry.
+    name: falco-pp7c4
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falcoctl-artifact-follow' from untrusted registry.
+    name: falco-pcqbp
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falco' from untrusted registry.
+    name: falco-pcqbp
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falcoctl-artifact-follow' from untrusted registry.
+    name: falco-9s8mz
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'falco' from untrusted registry.
+    name: falco-9s8mz
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'enterprise-api' from untrusted registry.
+    name: enterprise-api-5458dbdf66-lbzj2
+    namespace: default
+    version: v1
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container 'enterprise-api' from untrusted registry.
+    name: enterprise-api-5458dbdf66-27ldn
+    namespace: default
+    version: v1
