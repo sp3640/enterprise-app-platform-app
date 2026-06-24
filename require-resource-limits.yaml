@@ -1,0 +1,21 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireLimits
+metadata:
+  name: require-resource-limits
+
+spec:
+  enforcementAction: deny
+
+  match:
+    excludedNamespaces:
+      - kube-system
+      - gatekeeper-system
+      - argocd
+      - falco
+      - ingress-nginx
+
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
